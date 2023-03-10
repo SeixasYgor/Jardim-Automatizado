@@ -20,18 +20,18 @@ const int botao2        = 9;
 const int botao3        = 10;
 
 //--------------------------------------------------------------
-//CONSTANTES PARA SENSORES DE UMIDADE DO SOLO
+//CONSTANTS FOR SOIL MOISTURE SENSORS
 const int pinoSensorHigro1  = A0; //PINO UTILIZADO PELO SENSOR
 const int pinoSensorHigro2  = A1; //PINO UTILIZADO PELO SENSOR
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//CONSTANTES PARA SENSOR DE LUMINOSIDADE
+//CONSTANTS FOR LIGHT SENSOR
 const int pinoSensorLDR     = A2; //PINO UTILIZADO PELO SENSOR
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//DEFINIÇÃO DE HORARIO FINAL E INICIAL DOS MOMENTOS QUE SE PODE LIGAR AS BOMBAS
+//DEFINITION OF THE FINAL AND INITIAL TIME OF THE MOMENTS WHEN THE PUMPS CAN BE TURNED ON
 const int HOUR_START_01 = 6;
 const int MINUTE_START_01 = 30;
 const int HOUR_END_01 = 9;
@@ -44,7 +44,7 @@ const int MINUTE_END_02 = 0;
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//DEFINIÇÃO DE PARAMETROS DE SOLO SECO E MOLHADO
+//DEFINITION OF DRY AND WET SOIL PARAMETERS
 const int analogSoloSeco = 400; //VALOR MEDIDO COM O SOLO SECO (VOCÊ PODE FAZER TESTES E AJUSTAR ESTE VALOR)
 const int analogSoloMolhado = 150; //VALOR MEDIDO COM O SOLO MOLHADO (VOCÊ PODE FAZER TESTES E AJUSTAR ESTE VALOR)
 const int percSoloSeco = 0; //MENOR PERCENTUAL DO SOLO SECO (0% - NÃO ALTERAR)
@@ -54,7 +54,7 @@ const int percMaxSoloSeco = 90; //Valor maximo para NÃO considerar um solo seco
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//SETUP PARA MENSAGENS DO SISTEMA
+//SETUP FOR SYSTEM MESSAGES
 const int NUM_MESSAGES = 6;      //TOTAL DE MENSAGENS SUPORTADAS
 const int MESSAGE_LAMP_01 = 0;    //POSIÇÃO DA MENSAGEM DA LAMPADA 01
 const int MESSAGE_LAMP_02 = 1;    //POSIÇÃO DA MENSAGEM DA LAMPADA 02
@@ -63,7 +63,7 @@ const int MESSAGE_BOMB_02 = 3;    //POSIÇÃO DA MENSAGEM DA BOMBA 02
 const int MESSAGE_TERRA_SECA_01 = 4;    //POSIÇÃO DA MENSAGEM DA BOMBA 02
 const int MESSAGE_TERRA_SECA_02 = 5;    //POSIÇÃO DA MENSAGEM DA BOMBA 02
 
-const char* messages[NUM_MESSAGES]; //DECLARÇÃO DO ARRAY QUE VAI SALVAR AS MENSAGENS
+const char* messages[NUM_MESSAGES]; //DECLARATION OF THE ARRAY THAT WILL SAVE THE MESSAGES
 //--------------------------------------------------------------
 
 int readDataDHT;
@@ -76,21 +76,21 @@ char daysOfTheWeek[7][12] = {"Domingo", "Segunda", "Terça", "Quarta", "Quinta",
 
 
 //--------------------------------------------------------------
-//CONTROLE DE TEMPO E EXIBIÇÃO DE MENSAGENS DO SISTEMA
+//TIME CONTROL AND DISPLAY OF SYSTEM MESSAGES
 const unsigned long interval_01 = 1000; // Define o intervalo de 5 segundos
 unsigned long previousMillis_01 = 0; // Variável que armazena o tempo da última execução
 int messageIndex = 0; // Índice da mensagem atual
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//CONTROLE DE TEMPO DA LEITURA PERIODICA DOS HIGROMETROS.
+//TIME CONTROL OF THE PERIODIC READING OF THE HYGROMETERS.
 //const unsigned long interval_02 = 1200000; // Define o intervalo de 20 min
 const unsigned long interval_02 = 5000; // Define o intervalo de 
 unsigned long previousMillis_02 = 0; // Variável que armazena o tempo da última execução
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//VARIAVEIS PARA CONTROLE DE UMIDADE DO SOLO
+//VARIABLES FOR SOIL MOISTURE CONTROL
 long valor_umid_solo_01 = 0;
 long valor_umid_solo_02 = 0;
 bool terraSeca_01 = true;
@@ -98,24 +98,24 @@ bool terraSeca_02 = true;
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//VARIAVEIS PARA CONTROLE DAS LAMPADAS
+//VARIABLES FOR LAMP CONTROL
 bool sinal_lamp_01;
 bool sinal_lamp_02;
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//VARIAVEIS PARA CONTROLE DAS BOMBAS
+//VARIABLES FOR PUMP CONTROL
 bool sinal_bomb_01;
 bool sinal_bomb_02;
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//VARIAVEL PARA RECEBER VALOR DE LUMINISIDADE
+//VARIABLE TO RECEIVE LIGHT VALUE
 int valor_luminosidade;
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//VARIAVEL PARA RECEBER ESTADO DOS BOTOES
+//VARIABLE TO RECEIVE BUTTON STATUS
 bool estadoBotao1;
 bool estadoBotao2;
 bool estadoBotao3;
@@ -258,7 +258,7 @@ void control_lampadas () {
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//FUNÇÃO PARA CONTROLAR UMIDADE DO SOLO
+//FUNCTION TO CONTROL SOIL HUMIDITY
 void leitura_umid_solo () {
   long aux1 = 0;
   long aux2 = 0;
@@ -324,7 +324,7 @@ void control_umid_solo (bool sinal_bomb1, bool sinal_bomb2) {
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//FUNÇÃO PARA CONTROLAR ACIONAMENTO DAS BOMBAS
+//FUNCTION TO CONTROL PUMP ACTIVATION
 void control_bombas () {
  DateTime now = rtc.now(); // Obtém a hora atual do RTC
 
@@ -361,7 +361,7 @@ void control_bombas () {
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-//FUNÇÕES PARA EXIBIÇÃO DE MENSAGENS DO SISTEMA
+//FUNCTIONS FOR DISPLAYING SYSTEM MESSAGES
 void update_messages() {
   if (sinal_lamp_01 == HIGH) {
     messages[MESSAGE_LAMP_01] = "Lamp01 ON";
@@ -434,7 +434,7 @@ void mensagens_sistema() {
 
 void loop() {
   //--------------------------------------------------------------
-  //CONTROLE UMIDADE DO SOLO
+  //SOIL MOISTURE CONTROL
     control_umid_solo (sinal_bomb_01, sinal_bomb_02);
   //--------------------------------------------------------------
   
